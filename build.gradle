@@ -16,10 +16,14 @@ dependencies {
 }
 
 jar{
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest{
         attributes(
                 'Main-class': 'org.example.Main'
         )
+    }
+    from {
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
